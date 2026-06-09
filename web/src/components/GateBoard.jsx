@@ -27,6 +27,9 @@ export default function GateBoard({ script, currentId, path = [], last, onPick }
   const cv = (s) => convert(s, script, 'hant');
   const current = currentId ? getPos(currentId) : null;
   const currentName = current && current.gateId === layout.gate.id ? current.name : null;
+  const artStyle = layout.art?.background
+    ? { '--gate-art-bg': `url(${layout.art.background})` }
+    : undefined;
 
   const visited = useMemo(() => {
     const out = new Map();
@@ -68,7 +71,12 @@ export default function GateBoard({ script, currentId, path = [], last, onPick }
         </div>
       </div>
 
-      <div className="gate-board-canvas" role="img" aria-label={cv('第一發始因地門二十一位坐標棋盤')}>
+      <div
+        className={`gate-board-canvas ${layout.art?.background ? 'has-art' : ''}`}
+        style={artStyle}
+        role="img"
+        aria-label={cv('第一發始因地門二十一位坐標棋盤')}
+      >
         {groupOrder.map((group) => (
           <div key={group} className={`gate-zone z-${group}`} aria-hidden="true">
             <span>{cv(layout.visualGroups[group].label_hant)}</span>
