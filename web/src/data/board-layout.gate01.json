@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "game": "xuanfopu",
+  "gate": {
+    "id": 1,
+    "name_hans": "发始因地门",
+    "name_hant": "發始因地門",
+    "title": "第一门：发始因地门",
+    "subtitle": "业因初分 · 升沉未定",
+    "layoutType": "branching-origin",
+    "aspectRatio": "9:16",
+    "coordinateSystem": {
+      "type": "normalized",
+      "xRange": [0, 1],
+      "yRange": [0, 1],
+      "origin": "top-left",
+      "note": "Use proportional coordinates so the board can adapt to mobile portrait screens."
+    }
+  },
+  "visualGroups": {
+    "evil": {
+      "label_hans": "恶业起点",
+      "label_hant": "惡業起點",
+      "tone": "dark-rock-cinnabar-ink",
+      "description": "三品十恶，象征纯恶业与恶趣因。",
+      "palette": ["#2B2926", "#5A2722", "#B5331F", "#E2D9C8"]
+    },
+    "mixed-view": {
+      "label_hans": "偏执有漏善",
+      "label_hant": "偏執有漏善",
+      "tone": "tilted-scripture-half-light-ink-lines",
+      "description": "见取、慢心行施、戒取，象征善中夹杂邪见、我慢与执取。",
+      "palette": ["#3A352F", "#B5331F", "#E6A52C", "#8C857C"]
+    },
+    "worldly-good": {
+      "label_hans": "世间善业",
+      "label_hant": "世間善業",
+      "tone": "warm-human-merit",
+      "description": "世间福与三品十善，象征人间善业与福报。",
+      "palette": ["#F7F3EA", "#E6A52C", "#2F6B44", "#D23A2C"]
+    },
+    "meditation": {
+      "label_hans": "禅定空境",
+      "label_hant": "禪定空境",
+      "tone": "mist-cloud-blue-green",
+      "description": "邪定、味禅、四禅、四无量心、四无色定，象征禅定的升沉与偏空风险。",
+      "palette": ["#5B9BD0", "#2F6B44", "#F7F3EA", "#8C857C"]
+    },
+    "supramundane": {
+      "label_hans": "出世入口",
+      "label_hant": "出世入口",
+      "tone": "clean-gold-scripture-light",
+      "description": "出世福、戒、定、慧等，象征通往更高法门的入口。",
+      "palette": ["#FDFBF5", "#E6A52C", "#B5331F", "#2B2926"]
+    }
+  },
+  "landmarks": [
+    {
+      "id": "start-wheel-altar",
+      "name_hans": "起手轮台",
+      "name_hant": "起手輪臺",
+      "x": 0.5,
+      "y": 0.73,
+      "role": "start-visual-anchor",
+      "description": "第一掷轮相后，玩家落入二十一因地之一。"
+    },
+    {
+      "id": "upper-exit",
+      "name_hans": "出世上行口",
+      "name_hant": "出世上行口",
+      "x": 0.5,
+      "y": 0.02,
+      "role": "visual-exit-to-higher-gates",
+      "description": "连接上方修行法门与圣位层。"
+    }
+  ],
+  "positions": [
+    {
+      "name_hans": "出世慧学",
+      "name_hant": "出世慧學",
+      "combo_hant": "佛佛",
+      "x": 0.5,
+      "y": 0.06,
+      "group": "supramundane",
+      "nodeSize": "major",
+      "visualHint": "wisdom-light-scroll",
+      "summary": "三乘四谛、十二因缘、六度与一乘般若的出世慧学入口。"
+    },
+    {
+      "name_hans": "意见参禅",
+      "name_hant": "意見參禪",
+      "combo_hant": "那佛",
+      "x": 0.24,
+      "y": 0.19,
+      "group": "supramundane",
+      "nodeSize": "normal",
+      "visualHint": "chan-platform-with-tilted-ink",
+      "summary": "参禅夹杂个人意见，证得可直超，失错可永堕。"
+    },
+    {
+      "name_hans": "利名习教",
+      "name_hant": "利名習教",
+      "combo_hant": "謨佛",
+      "x": 0.37,
+      "y": 0.15,
+      "group": "supramundane",
+      "nodeSize": "normal",
+      "visualHint": "scripture-stand-with-cinnabar-shadow",
+      "summary": "学习佛教但被名利牵缠，滞留罪福两边。"
+    },
+    {
+      "name_hans": "出世福业",
+      "name_hant": "出世福業",
+      "combo_hant": "阿佛",
+      "x": 0.5,
+      "y": 0.14,
+      "group": "supramundane",
+      "nodeSize": "normal",
+      "visualHint": "three-jewels-merit-altar",
+      "summary": "在三宝门中广行施福，求出生死。"
+    },
+    {
+      "name_hans": "出世戒学",
+      "name_hant": "出世戒學",
+      "combo_hant": "彌佛",
+      "x": 0.63,
+      "y": 0.15,
+      "group": "supramundane",
+      "nodeSize": "normal",
+      "visualHint": "precept-altar-clean-steps",
+      "summary": "在家出家、小乘大乘戒学的起点。"
+    },
+    {
+      "name_hans": "出世定学",
+      "name_hant": "出世定學",
+      "combo_hant": "陀佛",
+      "x": 0.76,
+      "y": 0.19,
+      "group": "supramundane",
+      "nodeSize": "normal",
+      "visualHint": "samadhi-pool-cloud-light",
+      "summary": "世间、亦世间亦出世间、出世间与中道三昧的禅定法门。"
+    },
+    {
+      "name_hans": "四无色定",
+      "name_hant": "四無色定",
+      "combo_hant": "陀陀",
+      "x": 0.86,
+      "y": 0.27,
+      "group": "meditation",
+      "nodeSize": "normal",
+      "visualHint": "transparent-void-ring",
+      "summary": "空无边处、识无边处、无所有处、非想非非想处。"
+    },
+    {
+      "name_hans": "四无量心",
+      "name_hant": "四無量心",
+      "combo_hant": "彌陀",
+      "x": 0.76,
+      "y": 0.34,
+      "group": "meditation",
+      "nodeSize": "normal",
+      "visualHint": "four-lamps-compassion-cloud",
+      "summary": "慈、悲、喜、舍四等心，可为菩提资粮。"
+    },
+    {
+      "name_hans": "根本四禅",
+      "name_hant": "根本四禪",
+      "combo_hant": "阿陀",
+      "x": 0.8,
+      "y": 0.45,
+      "group": "meditation",
+      "nodeSize": "normal",
+      "visualHint": "dhyana-cloud-terrace",
+      "summary": "四禅、四无量心、四无色定中的世间净禅基础。"
+    },
+    {
+      "name_hans": "味禅",
+      "name_hant": "味禪",
+      "combo_hant": "謨陀",
+      "x": 0.84,
+      "y": 0.56,
+      "group": "meditation",
+      "nodeSize": "normal",
+      "visualHint": "misty-meditation-with-attachment-vines",
+      "summary": "禅定与烦恼相应，贪着禅味。"
+    },
+    {
+      "name_hans": "邪定",
+      "name_hant": "邪定",
+      "combo_hant": "那陀",
+      "x": 0.82,
+      "y": 0.67,
+      "group": "meditation",
+      "nodeSize": "normal",
+      "visualHint": "crooked-meditation-stone-mist",
+      "summary": "以邪见心修习禅定，能摄心但方向偏邪。"
+    },
+    {
+      "name_hans": "戒取",
+      "name_hant": "戒取",
+      "combo_hant": "那彌",
+      "x": 0.16,
+      "y": 0.37,
+      "group": "mixed-view",
+      "nodeSize": "normal",
+      "visualHint": "mistaken-discipline-plaque",
+      "summary": "执着错误戒禁和苦行，认为其因最胜。"
+    },
+    {
+      "name_hans": "慢心行施",
+      "name_hant": "慢心行施",
+      "combo_hant": "謨阿",
+      "x": 0.2,
+      "y": 0.51,
+      "group": "mixed-view",
+      "nodeSize": "normal",
+      "visualHint": "offering-table-with-pride-shadow",
+      "summary": "以我慢心行布施，是阿修罗道的因。"
+    },
+    {
+      "name_hans": "见取",
+      "name_hant": "見取",
+      "combo_hant": "那阿",
+      "x": 0.15,
+      "y": 0.65,
+      "group": "mixed-view",
+      "nodeSize": "normal",
+      "visualHint": "wrong-view-tangled-scroll",
+      "summary": "执着某种见解及五蕴，以为能得清净果。"
+    },
+    {
+      "name_hans": "上品十善",
+      "name_hant": "上品十善",
+      "combo_hant": "彌彌",
+      "x": 0.58,
+      "y": 0.41,
+      "group": "worldly-good",
+      "nodeSize": "normal",
+      "visualHint": "bright-good-action-lanterns",
+      "summary": "善念淳厚、广大、长久积累，但仍属散善。"
+    },
+    {
+      "name_hans": "中品十善",
+      "name_hant": "中品十善",
+      "combo_hant": "阿彌",
+      "x": 0.5,
+      "y": 0.49,
+      "group": "worldly-good",
+      "nodeSize": "normal",
+      "visualHint": "human-good-path-bridge",
+      "summary": "善念淳熟但不猛利，有布施与持戒，是人道因。"
+    },
+    {
+      "name_hans": "下品十善",
+      "name_hant": "下品十善",
+      "combo_hant": "謨彌",
+      "x": 0.42,
+      "y": 0.57,
+      "group": "worldly-good",
+      "nodeSize": "normal",
+      "visualHint": "small-merit-lamps",
+      "summary": "善行不广大或不长久，且夹杂爱烦恼。"
+    },
+    {
+      "name_hans": "世间福",
+      "name_hant": "世間福",
+      "combo_hant": "阿阿",
+      "x": 0.5,
+      "y": 0.67,
+      "group": "worldly-good",
+      "nodeSize": "normal",
+      "visualHint": "giving-altar-release-life-pond",
+      "summary": "以布施为代表的世间福业，能障碍三恶道门。"
+    },
+    {
+      "name_hans": "上品十恶",
+      "name_hant": "上品十惡",
+      "combo_hant": "那那",
+      "x": 0.25,
+      "y": 0.88,
+      "group": "evil",
+      "nodeSize": "normal",
+      "visualHint": "deep-karmic-cracked-stone",
+      "summary": "邪见极重、恶业炽盛，是地狱因。"
+    },
+    {
+      "name_hans": "中品十恶",
+      "name_hant": "中品十惡",
+      "combo_hant": "那謨",
+      "x": 0.5,
+      "y": 0.92,
+      "group": "evil",
+      "nodeSize": "normal",
+      "visualHint": "animal-realm-dark-crossroad",
+      "summary": "夹杂见惑和爱惑所起恶业，是畜生道因。"
+    },
+    {
+      "name_hans": "下品十恶",
+      "name_hant": "下品十惡",
+      "combo_hant": "謨謨",
+      "x": 0.75,
+      "y": 0.88,
+      "group": "evil",
+      "nodeSize": "normal",
+      "visualHint": "hungry-ghost-dim-cinder-path",
+      "summary": "任运烦恼所起轻恶，是饿鬼道因。"
+    }
+  ],
+  "suggestedEdges": [
+    ["start-wheel-altar", "世间福"],
+    ["start-wheel-altar", "见取"],
+    ["start-wheel-altar", "邪定"],
+    ["start-wheel-altar", "上品十恶"],
+    ["start-wheel-altar", "中品十恶"],
+    ["start-wheel-altar", "下品十恶"],
+    ["上品十恶", "中品十恶"],
+    ["中品十恶", "下品十恶"],
+    ["见取", "慢心行施"],
+    ["慢心行施", "戒取"],
+    ["世间福", "下品十善"],
+    ["下品十善", "中品十善"],
+    ["中品十善", "上品十善"],
+    ["邪定", "味禅"],
+    ["味禅", "根本四禅"],
+    ["根本四禅", "四无量心"],
+    ["四无量心", "四无色定"],
+    ["世间福", "出世福业"],
+    ["上品十善", "出世福业"],
+    ["出世福业", "出世戒学"],
+    ["出世戒学", "出世定学"],
+    ["出世定学", "出世慧学"],
+    ["意见参禅", "出世慧学"],
+    ["利名习教", "出世慧学"]
+  ],
+  "mobileRendering": {
+    "defaultMode": "gate-focus",
+    "showAllPositionsInGate": true,
+    "showOtherGates": false,
+    "nodeLabelPolicy": "show-current-and-nearby-labels; abbreviate-others",
+    "backgroundPolicy": "art-background-with-ui-text-overlay",
+    "minimumTapTargetPx": 44,
+    "recommendedBoardPadding": {
+      "top": 0.04,
+      "right": 0.05,
+      "bottom": 0.04,
+      "left": 0.05
+    }
+  }
+}
