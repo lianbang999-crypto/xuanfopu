@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { roll, startPosition, step, getPos, tierOf, bandOf, resolve } from '../lib/game.js';
 import { convert } from '../lib/convert.js';
 import SumeruMap from './SumeruMap.jsx';
+import GateBoard from './GateBoard.jsx';
 import PositionDetail from './PositionDetail.jsx';
 
 const BAND_LABEL = {
@@ -164,8 +165,8 @@ function diceCombo(a, b) {
 }
 
 function randomDiceDisplay() {
-  const a = DICE_CHARS[Math.floor(Math.random() * DICE_CHARS.length)];
-  const b = DICE_CHARS[Math.floor(Math.random() * DICE_CHARS.length)];
+  const a = DICE_CHARS[Math.floor(Math.random() * 6)];
+  const b = DICE_CHARS[Math.floor(Math.random() * 6)];
   return { dice: [a, b], combo: diceCombo(a, b) };
 }
 
@@ -320,13 +321,18 @@ export default function Game({ script }) {
   }
 
   const shownDice = visibleDice || dice;
+  const showGateBoard = !pos || pos.gateId === 1;
 
   return (
     <main className="game-sumeru">
       <section className="sumeru-stage">
         <JourneyStatus pos={pos} path={path} last={last} cv={cv} mapMode={mapMode} setMapMode={setMapMode} />
         <div className="sumeru-scroll">
-          <SumeruMap script={script} currentId={pos ? pos.id : null} path={path} last={last} mapMode={mapMode} onPick={setPicked} />
+          {showGateBoard ? (
+            <GateBoard script={script} currentId={pos ? pos.id : null} path={path} last={last} onPick={setPicked} />
+          ) : (
+            <SumeruMap script={script} currentId={pos ? pos.id : null} path={path} last={last} mapMode={mapMode} onPick={setPicked} />
+          )}
         </div>
       </section>
 
