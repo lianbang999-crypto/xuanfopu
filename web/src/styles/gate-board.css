@@ -88,6 +88,24 @@
   isolation: isolate;
 }
 
+.gate-board-canvas.has-art {
+  background:
+    linear-gradient(180deg, rgba(253, 251, 245, .06), rgba(43, 41, 38, .12)),
+    var(--gate-art-bg),
+    linear-gradient(180deg, #fdfbf5 0%, #f6f0e5 58%, #d9c7ad 100%);
+  background-size: cover, cover, cover;
+  background-position: center, center, center;
+  background-repeat: no-repeat;
+}
+
+.gate-board-canvas.has-art .gate-zone {
+  opacity: .22;
+}
+
+.gate-board-canvas.has-art .gate-zone span {
+  opacity: .35;
+}
+
 .gate-board-canvas::before {
   content: '';
   position: absolute;
@@ -98,6 +116,14 @@
   background-size: 10% 10%;
   opacity: .45;
   pointer-events: none;
+}
+
+.gate-board-canvas.has-art::before {
+  background:
+    radial-gradient(circle at 50% 76%, rgba(253, 251, 245, .16), transparent 18%),
+    linear-gradient(180deg, rgba(253, 251, 245, .1), transparent 28%, rgba(43, 41, 38, .08));
+  background-size: auto;
+  opacity: 1;
 }
 
 .gate-zone {
@@ -169,6 +195,11 @@
   pointer-events: none;
 }
 
+.gate-board-canvas.has-art .gate-edge {
+  background: linear-gradient(90deg, rgba(255, 248, 220, .2), rgba(230, 165, 44, .5), rgba(43, 41, 38, .08));
+  box-shadow: 0 0 6px rgba(230, 165, 44, .2);
+}
+
 .gate-landmark,
 .gate-node {
   position: absolute;
@@ -225,6 +256,12 @@
   background: rgba(253, 251, 245, .86);
   box-shadow: 0 5px 14px rgba(43, 23, 14, .1);
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.gate-board-canvas.has-art .gate-node {
+  background: rgba(253, 251, 245, .88);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 5px 14px rgba(43, 23, 14, .18);
 }
 
 .gate-node:hover,
