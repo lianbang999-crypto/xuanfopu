@@ -122,7 +122,7 @@ function SvgHit({ children, onClick, label }) {
   );
 }
 
-export default function SumeruSvgMap({ script, currentId, path = [], last, mapMode = 'focus', onPick }) {
+export default function SumeruSvgMap({ script, currentId, path = [], last, mapMode = 'focus', onPick, onGatePick }) {
   const cv = (s) => convert(s, script, 'hant');
   const current = currentId ? getPos(currentId) : null;
   const currentGateId = current?.gateId || null;
@@ -230,7 +230,7 @@ export default function SumeruSvgMap({ script, currentId, path = [], last, mapMo
               )}
               <g className={`svg-gate gate-${gate.gateId} band-${gate.band} ${gate.compact ? 'is-compact' : ''} ${isCurrentGate ? 'is-current' : ''} ${isVisitedGate && !isCurrentGate ? 'is-visited' : ''} ${isProspectGate && !isCurrentGate ? 'is-prospect' : ''}`} data-gate={gate.gateId}>
                 <rect className="svg-gate-bg" x={gate.x} y={gate.y} width={gate.w} height={gate.h} rx="18" fill={BAND_FILL[gate.band]} />
-                <SvgHit label={cv(gateName[gate.gateId])} onClick={() => onPick?.(gate.positions[0]?.id)}>
+                <SvgHit label={cv(`${gateName[gate.gateId]}門卡`)} onClick={() => onGatePick?.(gate.gateId)}>
                   <rect className="svg-gate-header" x={gate.x + 10} y={gate.y + 10} width={gate.w - 20} height="28" rx="10" />
                   <text className="svg-gate-title" x={gate.x + 22} y={gate.y + 29}>{cv(`第${gate.gateId}門 · ${gateName[gate.gateId]}`)}</text>
                   <text className="svg-gate-count" x={gate.x + gate.w - 26} y={gate.y + 29} textAnchor="end">{gate.positions.length}位</text>
