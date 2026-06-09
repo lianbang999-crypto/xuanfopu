@@ -3,6 +3,7 @@ import { roll, startPosition, step, getPos, tierOf, bandOf, resolve } from '../l
 import { convert } from '../lib/convert.js';
 import SumeruMap from './SumeruMap.jsx';
 import GateBoard from './GateBoard.jsx';
+import SumeruSvgMap from './SumeruSvgMap.jsx';
 import PositionDetail from './PositionDetail.jsx';
 
 const BAND_LABEL = {
@@ -236,6 +237,7 @@ export default function Game({ script }) {
   const [visibleDice, setVisibleDice] = useState(null);
   const [rollKey, setRollKey] = useState(0);
   const [mapMode, setMapMode] = useState('focus');
+  const [boardView, setBoardView] = useState('svg');
   const rollTimers = useRef([]);
 
   function pushLog(combo, text, kind) {
@@ -321,14 +323,21 @@ export default function Game({ script }) {
   }
 
   const shownDice = visibleDice || dice;
-  const showGateBoard = !pos || pos.gateId === 1;
+  const showGateBoard = boardView === 'gate' && (!pos || pos.gateId === 1);
 
   return (
     <main className="game-sumeru">
       <section className="sumeru-stage">
         <JourneyStatus pos={pos} path={path} last={last} cv={cv} mapMode={mapMode} setMapMode={setMapMode} />
+        <div className="map-mode board-view-switch" role="group" aria-label={cv('棋盤樣式')}>
+          <button className={boardView === 'classic' ? 'active' : ''} onClick={() => setBoardView('classic')}>{cv('原圖')}</button>
+          <button className={boardView === 'gate' ? 'active' : ''} onClick={() => setBoardView('gate')}>{cv('門圖')}</button>
+          <button className={boardView === 'svg' ? 'active' : ''} onClick={() => setBoardView('svg')}>{cv('SVG')}</button>
+        </div>
         <div className="sumeru-scroll">
-          {showGateBoard ? (
+          {boardView === 'svg' ? (
+            <SumeruSvgMap script={script} currentId={pos ? pos.id : null} path={path} last={last} mapMode={mapMode} onPick={setPicked} />
+          ) : showGateBoard ? (
             <GateBoard script={script} currentId={pos ? pos.id : null} path={path} last={last} onPick={setPicked} />
           ) : (
             <SumeruMap script={script} currentId={pos ? pos.id : null} path={path} last={last} mapMode={mapMode} onPick={setPicked} />
