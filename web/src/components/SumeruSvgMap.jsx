@@ -10,7 +10,6 @@ const NODE_W = 74;
 const NODE_H = 28;
 const PAD_X = 18;
 const PAD_TOP = 12;
-const PAD_BOTTOM = 16;
 
 const BAND_LABEL = {
   buddha: '佛果',
@@ -38,14 +37,7 @@ const gateName = Object.fromEntries(GATES.map((g) => [g.id, g.name]));
 const byGate = {};
 POSITIONS.forEach((p) => (byGate[p.gateId] ||= []).push(p));
 
-const BIE_SUB = {
-  0: '十信',
-  10: '十住',
-  20: '十行',
-  30: '十迴向',
-  40: '十地',
-  50: '等覺妙覺',
-};
+const BIE_SUB = { 0: '十信', 10: '十住', 20: '十行', 30: '十迴向', 40: '十地', 50: '等覺妙覺' };
 
 function isCompactGate(tier, currentGateId, visitedGates, prospectGates, mode) {
   if (mode === 'all') return false;
@@ -107,8 +99,27 @@ function moveDir(from, to) {
 
 function compactLabel(name) {
   if (!name) return '';
-  if (name.length <= 5) return name;
-  return `${name.slice(0, 4)}…`;
+  return name.length <= 5 ? name : `${name.slice(0, 4)}…`;
+}
+
+function SvgHit({ children, onClick, label }) {
+  return (
+    <g
+      className="svg-hit"
+      role="button"
+      tabIndex="0"
+      aria-label={label}
+      onClick={onClick}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          onClick?.(event);
+        }
+      }}
+    >
+      {children}
+    </g>
+  );
 }
 
 export default function SumeruSvgMap({ script, currentId, path = [], last, mapMode = 'focus', onPick }) {
@@ -167,17 +178,7 @@ export default function SumeruSvgMap({ script, currentId, path = [], last, mapMo
       const positions = byGate[tier.gate] || [];
       const compact = isCompactGate(tier, currentGateId, visitedGates, prospectGates, mapMode);
       const h = gateHeight(positions.length, compact, tier.gate);
-      const gateBox = {
-        gateId: tier.gate,
-        band: tier.band,
-        compact,
-        x: 16,
-        y,
-        w: VIEW_W - 32,
-        h,
-        showBand: tier.band !== previousBand,
-        positions,
-      };
+      const gateBox = { gateId: tier.gate, band: tier.band, compact, x: 16, y, w: VIEW_W - 32, h, showBand: tier.band !== previousBand, positions };
       previousBand = tier.band;
       const nodes = layoutNodes(positions, gateBox, compact, tier.gate);
       nodes.forEach((n) => nodeLookup.set(n.p.id, n));
@@ -200,12 +201,7 @@ export default function SumeruSvgMap({ script, currentId, path = [], last, mapMo
 
   return (
     <div className="sumeru-svg-wrap">
-      <svg
-        className={`sumeru-svg map-${mapMode} ${current ? 'has-current' : ''}`}
-        viewBox={`0 0 ${VIEW_W} ${layout.height}`}
-        role="img"
-        aria-label={cv('選佛譜十五門二百二十位 SVG 棋盤')}
-      >
+      <svg className={`sumeru-svg map-${mapMode} ${current ? 'has-current' : ''}`} viewBox={`0 0 ${VIEW_W} ${layout.height}`} role="img" aria-label={cv('選佛譜十五門二百二十位 SVG 棋盤')}>
         <defs>
           <filter id="sumeruSvgShadow" x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#2b2926" floodOpacity="0.08" />
@@ -232,16 +228,13 @@ export default function SumeruSvgMap({ script, currentId, path = [], last, mapMo
                   <text x="48" y="15" textAnchor="middle">{cv(BAND_LABEL[gate.band])}</text>
                 </g>
               )}
-              <g
-                className={`svg-gate gate-${gate.gateId} band-${gate.band} ${gate.compact ? 'is-compact' : ''} ${isCurrentGate ? 'is-current' : ''} ${isVisitedGate && !isCurrentGate ? 'is-visited' : ''} ${isProspectGate && !isCurrentGate ? 'is-prospect' : ''}`}
-                data-gate={gate.gateId}
-              >
+              <g className={`svg-gate gate-${gate.gateId} band-${gate.band} ${gate.compact ? 'is-compact' : ''} ${isCurrentGate ? 'is-current' : ''} ${isVisitedGate && !isCurrentGate ? 'is-visited' : ''} ${isProspectGate && !isCurrentGate ? 'is-prospect' : ''}`} data-gate={gate.gateId}>
                 <rect className="svg-gate-bg" x={gate.x} y={gate.y} width={gate.w} height={gate.h} rx="18" fill={BAND_FILL[gate.band]} />
-                <button className="svg-hit svg-gate-hit" onClick={() => onPick?.(gate.positions[0]?.id)}>
+                <SvgHit label={cv(gateName[gate.gateId])} onClick={() => onPick?.(gate.positions[0]?.id)}>
                   <rect className="svg-gate-header" x={gate.x + 10} y={gate.y + 10} width={gate.w - 20} height="28" rx="10" />
                   <text className="svg-gate-title" x={gate.x + 22} y={gate.y + 29}>{cv(`第${gate.gateId}門 · ${gateName[gate.gateId]}`)}</text>
                   <text className="svg-gate-count" x={gate.x + gate.w - 26} y={gate.y + 29} textAnchor="end">{gate.positions.length}位</text>
-                </button>
+                </SvgHit>
 
                 {gate.compact ? (
                   <g className="svg-compact-dots">
@@ -250,19 +243,12 @@ export default function SumeruSvgMap({ script, currentId, path = [], last, mapMo
                       const future = prospects.get(node.p.id);
                       const wasVisited = visited.get(node.p.id);
                       return (
-                        <button key={node.p.id} className="svg-hit" onClick={() => onPick?.(node.p.id)}>
-                          <circle
-                            className={`svg-dot ${isCurrent ? 'is-current' : ''} ${future ? 'is-prospect' : ''} ${wasVisited ? 'is-visited' : ''}`}
-                            cx={node.x}
-                            cy={node.y}
-                            r={isCurrent ? 4.5 : 3.5}
-                          />
-                        </button>
+                        <SvgHit key={node.p.id} label={cv(node.p.name)} onClick={() => onPick?.(node.p.id)}>
+                          <circle className={`svg-dot ${isCurrent ? 'is-current' : ''} ${future ? 'is-prospect' : ''} ${wasVisited ? 'is-visited' : ''}`} cx={node.x} cy={node.y} r={isCurrent ? 4.5 : 3.5} />
+                        </SvgHit>
                       );
                     })}
-                    {gate.positions.length > gate.nodes.length && (
-                      <text className="svg-more" x={gate.x + gate.w - 28} y={gate.y + 53} textAnchor="end">+{gate.positions.length - gate.nodes.length}</text>
-                    )}
+                    {gate.positions.length > gate.nodes.length && <text className="svg-more" x={gate.x + gate.w - 28} y={gate.y + 53} textAnchor="end">+{gate.positions.length - gate.nodes.length}</text>}
                   </g>
                 ) : (
                   <g className="svg-expanded-nodes">
@@ -279,14 +265,14 @@ export default function SumeruSvgMap({ script, currentId, path = [], last, mapMo
                               <text x="33" y="13" textAnchor="middle">{cv(node.subgroup)}</text>
                             </g>
                           )}
-                          <button className="svg-hit" onClick={() => onPick?.(node.p.id)}>
+                          <SvgHit label={cv(node.p.name)} onClick={() => onPick?.(node.p.id)}>
                             <g className={`svg-node ${state}`} data-nid={node.p.id} transform={`translate(${node.x} ${node.y})`}>
                               <rect x={-NODE_W / 2} y={-NODE_H / 2} width={NODE_W} height={NODE_H} rx="10" />
                               <text className="svg-node-name" y="4" textAnchor="middle">{cv(compactLabel(node.p.name))}</text>
                               {wasVisited && !isCurrent && <text className="svg-node-badge" x="31" y="-8" textAnchor="middle">{wasVisited.step}</text>}
                               {future && !isCurrent && <text className="svg-node-badge future" x="31" y="-8" textAnchor="middle">{future.count}</text>}
                             </g>
-                          </button>
+                          </SvgHit>
                         </Fragment>
                       );
                     })}
