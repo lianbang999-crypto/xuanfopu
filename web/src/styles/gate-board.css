@@ -1,0 +1,372 @@
+.gate-board-wrap {
+  position: relative;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(230, 165, 44, .12), transparent 34%),
+    linear-gradient(180deg, rgba(253, 251, 245, .92), rgba(247, 243, 234, .84));
+  box-shadow: var(--shadow);
+}
+
+.gate-board-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 4px 4px 12px;
+}
+
+.gate-board-kicker {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--cinnabar);
+}
+
+.gate-board-head h2 {
+  margin: 0;
+  font-family: var(--serif-title);
+  font-size: clamp(22px, 5vw, 34px);
+  letter-spacing: 4px;
+  color: var(--ink);
+}
+
+.gate-board-head p {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.gate-board-state {
+  flex: none;
+  min-width: 88px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(181, 51, 31, .18);
+  background: rgba(253, 251, 245, .7);
+  text-align: center;
+}
+
+.gate-board-state span,
+.gate-board-state em {
+  display: block;
+}
+
+.gate-board-state span {
+  font-family: var(--serif-title);
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.gate-board-state em {
+  margin-top: 2px;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 2px;
+}
+
+.gate-board-canvas {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  min-height: 620px;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid var(--line-soft);
+  background:
+    radial-gradient(circle at 50% 4%, rgba(230, 165, 44, .2), transparent 20%),
+    radial-gradient(circle at 78% 35%, rgba(91, 155, 208, .18), transparent 26%),
+    radial-gradient(circle at 20% 45%, rgba(181, 51, 31, .11), transparent 25%),
+    radial-gradient(circle at 50% 62%, rgba(47, 107, 68, .12), transparent 24%),
+    linear-gradient(180deg, #fdfbf5 0%, #f6f0e5 58%, #d9c7ad 100%);
+  isolation: isolate;
+}
+
+.gate-board-canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(43, 41, 38, .035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(43, 41, 38, .035) 1px, transparent 1px);
+  background-size: 10% 10%;
+  opacity: .45;
+  pointer-events: none;
+}
+
+.gate-zone {
+  position: absolute;
+  border: 1px solid rgba(43, 41, 38, .08);
+  border-radius: 999px;
+  filter: blur(.1px);
+  opacity: .74;
+  pointer-events: none;
+}
+
+.gate-zone span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: rgba(43, 41, 38, .42);
+  white-space: nowrap;
+}
+
+.z-evil {
+  left: 8%;
+  right: 8%;
+  bottom: 2%;
+  height: 22%;
+  background: radial-gradient(circle, rgba(181, 51, 31, .14), rgba(43, 41, 38, .08));
+}
+
+.z-mixed-view {
+  left: 3%;
+  top: 30%;
+  width: 34%;
+  height: 38%;
+  background: radial-gradient(circle, rgba(181, 51, 31, .10), rgba(230, 165, 44, .08));
+}
+
+.z-worldly-good {
+  left: 30%;
+  top: 36%;
+  width: 40%;
+  height: 35%;
+  background: radial-gradient(circle, rgba(47, 107, 68, .10), rgba(230, 165, 44, .08));
+}
+
+.z-meditation {
+  right: 3%;
+  top: 20%;
+  width: 35%;
+  height: 52%;
+  background: radial-gradient(circle, rgba(91, 155, 208, .14), rgba(47, 107, 68, .06));
+}
+
+.z-supramundane {
+  left: 8%;
+  right: 8%;
+  top: 2%;
+  height: 24%;
+  background: radial-gradient(circle, rgba(230, 165, 44, .18), rgba(253, 251, 245, .08));
+}
+
+.gate-edge {
+  position: absolute;
+  height: 1px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, rgba(181, 51, 31, .16), rgba(230, 165, 44, .32), rgba(43, 41, 38, .06));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gate-landmark,
+.gate-node {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  font-family: var(--serif);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gate-landmark {
+  width: 62px;
+  min-height: 52px;
+  border: none;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--paper-2);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 224, 142, .42), transparent 36%),
+    linear-gradient(145deg, #70351f, #2d1710);
+  box-shadow: 0 10px 24px rgba(43, 23, 14, .22);
+}
+
+.gate-landmark.upper-exit {
+  width: 48px;
+  min-height: 40px;
+  background: linear-gradient(145deg, rgba(230, 165, 44, .92), rgba(181, 51, 31, .75));
+}
+
+.gate-landmark span {
+  font-family: var(--serif-title);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.gate-landmark b {
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.gate-node {
+  min-width: 58px;
+  max-width: 84px;
+  min-height: 44px;
+  padding: 6px 7px;
+  border-radius: 13px;
+  border: 1px solid rgba(43, 41, 38, .12);
+  color: var(--ink);
+  background: rgba(253, 251, 245, .86);
+  box-shadow: 0 5px 14px rgba(43, 23, 14, .1);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.gate-node:hover,
+.gate-node:focus-visible {
+  transform: translate(-50%, -50%) scale(1.05);
+  outline: none;
+  box-shadow: 0 8px 20px rgba(43, 23, 14, .16);
+}
+
+.gate-node.major {
+  min-width: 76px;
+  min-height: 54px;
+  border-radius: 16px;
+  background: rgba(255, 248, 224, .95);
+}
+
+.gate-node .combo,
+.gate-node .name {
+  display: block;
+  line-height: 1.15;
+}
+
+.gate-node .combo {
+  font-family: var(--serif-title);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cinnabar);
+  letter-spacing: 1px;
+}
+
+.gate-node .name {
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.g-evil { background: rgba(69, 46, 39, .88); color: var(--paper-2); border-color: rgba(181, 51, 31, .3); }
+.g-evil .combo { color: #f0b17c; }
+.g-mixed-view { background: rgba(255, 246, 222, .88); border-color: rgba(181, 51, 31, .22); }
+.g-worldly-good { background: rgba(248, 250, 231, .9); border-color: rgba(47, 107, 68, .18); }
+.g-meditation { background: rgba(235, 246, 249, .9); border-color: rgba(91, 155, 208, .22); }
+.g-supramundane { background: rgba(255, 250, 232, .94); border-color: rgba(230, 165, 44, .28); }
+
+.gate-node.s-current {
+  z-index: 4;
+  border-color: var(--cinnabar);
+  background: var(--paper-2);
+  box-shadow: 0 0 0 3px rgba(181, 51, 31, .12), 0 12px 26px rgba(181, 51, 31, .16);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.gate-node.s-up,
+.gate-node.s-flat,
+.gate-node.s-down {
+  z-index: 3;
+  border-color: rgba(230, 165, 44, .72);
+  box-shadow: 0 0 0 3px rgba(230, 165, 44, .16), 0 8px 18px rgba(43, 23, 14, .12);
+}
+
+.gate-node.s-up { background: rgba(255, 248, 219, .96); }
+.gate-node.s-down { background: rgba(245, 232, 220, .96); }
+.gate-node.s-flat { background: rgba(237, 244, 236, .96); }
+.gate-node.s-visited { opacity: .72; }
+
+.gate-node .step,
+.gate-node .future {
+  position: absolute;
+  right: -5px;
+  top: -6px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--paper-2);
+}
+
+.gate-node .step { background: rgba(43, 41, 38, .62); }
+.gate-node .future { background: var(--cinnabar); }
+
+.gate-board-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  justify-content: center;
+  padding: 12px 4px 0;
+  color: var(--ink-soft);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.gate-board-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.gate-board-legend .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.current { background: var(--cinnabar); }
+.dot.prospect { background: var(--golden); }
+.dot.visited { background: rgba(43, 41, 38, .45); }
+.dot.normal { background: var(--line); }
+
+@media (max-width: 720px) {
+  .gate-board-wrap {
+    max-width: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+  }
+  .gate-board-head {
+    padding-bottom: 8px;
+  }
+  .gate-board-state {
+    display: none;
+  }
+  .gate-board-canvas {
+    min-height: min(660px, calc(100vh - 230px));
+  }
+  .gate-zone span {
+    font-size: 10px;
+  }
+  .gate-node {
+    min-width: 52px;
+    max-width: 72px;
+    min-height: 42px;
+    padding: 5px 6px;
+  }
+  .gate-node .combo {
+    font-size: 10px;
+  }
+  .gate-node .name {
+    font-size: 11px;
+  }
+}
