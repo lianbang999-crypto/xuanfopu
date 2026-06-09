@@ -1,0 +1,282 @@
+.sumeru-svg-wrap {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(230, 165, 44, .12), transparent 28%),
+    linear-gradient(180deg, rgba(253, 251, 245, .88), rgba(247, 243, 234, .76));
+  box-shadow: var(--shadow);
+}
+
+.sumeru-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: var(--serif);
+}
+
+.svg-paper {
+  fill: url(#sumeruSvgPaper);
+}
+
+.svg-sumeru-spine {
+  fill: none;
+  stroke: rgba(168, 147, 112, .18);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 1 12;
+}
+
+.svg-band-label rect {
+  fill: rgba(253, 251, 245, .82);
+  stroke: rgba(216, 205, 192, .84);
+  stroke-width: 1;
+}
+
+.svg-band-label text {
+  font-size: 11px;
+  fill: rgba(75, 64, 56, .72);
+  letter-spacing: 2px;
+}
+
+.svg-gate-bg {
+  stroke: rgba(216, 205, 192, .72);
+  stroke-width: 1;
+  filter: url(#sumeruSvgShadow);
+}
+
+.svg-gate.is-current .svg-gate-bg {
+  stroke: rgba(181, 51, 31, .66);
+  stroke-width: 1.6;
+  filter: url(#sumeruSvgShadow);
+}
+
+.svg-gate.is-visited:not(.is-current) .svg-gate-bg {
+  stroke: rgba(43, 41, 38, .22);
+}
+
+.svg-gate.is-prospect:not(.is-current) .svg-gate-bg {
+  stroke: rgba(230, 165, 44, .58);
+}
+
+.svg-gate.is-compact .svg-gate-bg {
+  opacity: .84;
+}
+
+.svg-gate-header {
+  fill: rgba(253, 251, 245, .76);
+  stroke: rgba(216, 205, 192, .75);
+  stroke-width: 1;
+}
+
+.svg-gate.is-current .svg-gate-header {
+  fill: rgba(255, 249, 232, .92);
+  stroke: rgba(181, 51, 31, .32);
+}
+
+.svg-gate-title {
+  font-family: var(--serif-title);
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ink);
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+.svg-gate-count {
+  font-size: 11px;
+  fill: rgba(75, 64, 56, .66);
+  pointer-events: none;
+}
+
+.svg-hit {
+  cursor: pointer;
+  outline: none;
+}
+
+.svg-dot {
+  fill: rgba(253, 251, 245, .95);
+  stroke: rgba(75, 64, 56, .36);
+  stroke-width: 1;
+}
+
+.svg-dot.is-visited {
+  fill: rgba(75, 64, 56, .34);
+}
+
+.svg-dot.is-prospect {
+  fill: rgba(230, 165, 44, .92);
+  stroke: rgba(145, 102, 20, .38);
+}
+
+.svg-dot.is-current {
+  fill: var(--cinnabar);
+  stroke: rgba(255, 255, 255, .92);
+  stroke-width: 1.6;
+}
+
+.svg-more {
+  font-size: 10px;
+  fill: rgba(75, 64, 56, .5);
+}
+
+.svg-node rect {
+  fill: rgba(253, 251, 245, .92);
+  stroke: rgba(216, 205, 192, .92);
+  stroke-width: 1;
+  filter: url(#sumeruSvgShadow);
+  transition: fill .18s ease, stroke .18s ease, stroke-width .18s ease;
+}
+
+.svg-node:hover rect,
+.svg-node:focus rect {
+  stroke: rgba(181, 51, 31, .38);
+  stroke-width: 1.4;
+}
+
+.svg-node.current rect {
+  fill: #fff0e8;
+  stroke: var(--cinnabar);
+  stroke-width: 2;
+}
+
+.svg-node.visited rect {
+  fill: rgba(244, 239, 232, .86);
+  stroke: rgba(122, 112, 104, .58);
+}
+
+.svg-node.prospect rect {
+  fill: #fff8dc;
+  stroke: rgba(230, 165, 44, .92);
+  stroke-width: 1.6;
+}
+
+.svg-node.prospect.down rect {
+  fill: #f4e5dc;
+  stroke: rgba(181, 51, 31, .5);
+}
+
+.svg-node.prospect.up rect {
+  fill: #fff7d8;
+  stroke: rgba(230, 165, 44, .98);
+}
+
+.svg-node.prospect.flat rect {
+  fill: #eef4e8;
+  stroke: rgba(47, 107, 68, .38);
+}
+
+.svg-node-name {
+  font-size: 10.5px;
+  font-weight: 700;
+  fill: var(--ink);
+  pointer-events: none;
+}
+
+.svg-node.current .svg-node-name {
+  fill: var(--cinnabar);
+}
+
+.svg-node-badge {
+  font-size: 9px;
+  font-weight: 700;
+  fill: rgba(75, 64, 56, .72);
+  pointer-events: none;
+}
+
+.svg-node-badge.future {
+  fill: var(--cinnabar);
+}
+
+.svg-subgroup rect {
+  fill: rgba(253, 251, 245, .78);
+  stroke: rgba(216, 205, 192, .76);
+  stroke-width: 1;
+}
+
+.svg-subgroup text {
+  font-size: 10px;
+  fill: rgba(75, 64, 56, .66);
+  letter-spacing: 1px;
+}
+
+.svg-move-line {
+  stroke: var(--cinnabar);
+  stroke-width: 3;
+  stroke-linecap: round;
+  fill: none;
+  filter: drop-shadow(0 0 6px rgba(181, 51, 31, .22));
+}
+
+.svg-move-line[data-dir="up"] {
+  stroke: var(--golden);
+  filter: drop-shadow(0 0 7px rgba(230, 165, 44, .28));
+}
+
+.svg-move-line[data-dir="down"] {
+  stroke: #7b4b42;
+  filter: drop-shadow(0 0 6px rgba(43, 41, 38, .22));
+}
+
+.svg-move-line[data-dir="flat"] {
+  stroke: var(--forest);
+  filter: drop-shadow(0 0 5px rgba(47, 107, 68, .16));
+}
+
+.svg-move-end {
+  fill: var(--paper-2);
+  stroke: var(--cinnabar);
+  stroke-width: 2;
+}
+
+.svg-move-end[data-dir="up"] { stroke: var(--golden); }
+.svg-move-end[data-dir="down"] { stroke: #7b4b42; }
+.svg-move-end[data-dir="flat"] { stroke: var(--forest); }
+
+.svg-pawn circle {
+  fill: rgba(253, 251, 245, .96);
+  stroke: var(--cinnabar);
+  stroke-width: 2;
+  filter: drop-shadow(0 6px 10px rgba(43, 23, 14, .18));
+}
+
+.svg-pawn text {
+  font-family: var(--serif-title);
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--cinnabar);
+  pointer-events: none;
+}
+
+.svg-pawn.is-blocked circle {
+  animation: svgPawnBump .62s ease;
+}
+
+@keyframes svgPawnBump {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
+@media (max-width: 720px) {
+  .sumeru-svg-wrap {
+    max-width: none;
+    border-radius: 18px;
+    padding: 6px;
+  }
+  .svg-gate-title {
+    font-size: 12px;
+  }
+  .svg-gate-count {
+    font-size: 10px;
+  }
+  .svg-node-name {
+    font-size: 10px;
+  }
+}
