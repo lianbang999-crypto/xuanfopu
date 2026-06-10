@@ -4,6 +4,7 @@ import { convert } from '../lib/convert.js';
 import SumeruMap from './SumeruMap.jsx';
 import GateBoard from './GateBoard.jsx';
 import SumeruSvgMap from './SumeruSvgMap.jsx';
+import GateCardModal from './GateCardModal.jsx';
 import PositionDetail from './PositionDetail.jsx';
 
 const BAND_LABEL = {
@@ -233,6 +234,7 @@ export default function Game({ script }) {
   const [gift, setGift] = useState(0);
   const [won, setWon] = useState(false);
   const [picked, setPicked] = useState(null);
+  const [pickedGate, setPickedGate] = useState(null);
   const [rolling, setRolling] = useState(false);
   const [visibleDice, setVisibleDice] = useState(null);
   const [rollKey, setRollKey] = useState(0);
@@ -319,7 +321,7 @@ export default function Game({ script }) {
 
   function reset() {
     clearRollTimers();
-    setPos(null); setPath([]); setDice(null); setVisibleDice(null); setLast(null); setLog([]); setGift(0); setWon(false); setPicked(null); setRolling(false);
+    setPos(null); setPath([]); setDice(null); setVisibleDice(null); setLast(null); setLog([]); setGift(0); setWon(false); setPicked(null); setPickedGate(null); setRolling(false);
   }
 
   const shownDice = visibleDice || dice;
@@ -336,7 +338,7 @@ export default function Game({ script }) {
         </div>
         <div className="sumeru-scroll">
           {boardView === 'svg' ? (
-            <SumeruSvgMap script={script} currentId={pos ? pos.id : null} path={path} last={last} mapMode={mapMode} onPick={setPicked} />
+            <SumeruSvgMap script={script} currentId={pos ? pos.id : null} path={path} last={last} mapMode={mapMode} onPick={setPicked} onGatePick={setPickedGate} />
           ) : showGateBoard ? (
             <GateBoard script={script} currentId={pos ? pos.id : null} path={path} last={last} onPick={setPicked} />
           ) : (
@@ -403,6 +405,7 @@ export default function Game({ script }) {
       {won && <div className="buddha-light" />}
       <MobileRollDock pos={pos} dice={dice} last={last} won={won} rolling={rolling} doRoll={doRoll} reset={reset} cv={cv} />
       {picked && <PositionDetail id={picked} script={script} onClose={() => setPicked(null)} />}
+      {pickedGate && <GateCardModal gateId={pickedGate} script={script} onClose={() => setPickedGate(null)} />}
     </main>
   );
 }
